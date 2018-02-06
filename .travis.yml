@@ -1,0 +1,6 @@
+language: go
+go:
+- 1.9
+script:
+- go test -v -cover
+- go build -v -ldflags "-X main.Revision=${TRAVIS_JOB_ID}" -o bin/envprint .

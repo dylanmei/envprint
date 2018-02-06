@@ -10,8 +10,8 @@ import (
 )
 
 var (
-	filename = flag.String("f", "", "Use template file instead of STDIN")
-	version  = flag.Bool("version", false, "Prints the current version")
+	filename    = flag.String("f", "", "Use template file instead of STDIN")
+	showVersion = flag.Bool("version", false, "Prints the current version")
 )
 
 func Print(template []byte) ([]byte, error) {
@@ -26,7 +26,7 @@ func Print(template []byte) ([]byte, error) {
 func main() {
 	flag.Parse()
 
-	if *version {
+	if *showVersion {
 		PrintVersion(os.Stdout)
 		os.Exit(0)
 	}
