@@ -9,7 +9,7 @@ LD_FLAGS ?= -s \
 default: test build
 
 test:
-	go test -v -cover -run=$(RUN)
+	go test -v -cover
 
 build: clean
 	@go build -v \
