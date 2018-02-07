@@ -1,6 +1,18 @@
 language: go
+
 go:
 - 1.9
+
 script:
 - go test -v -cover
 - go build -v -ldflags "-X main.Revision=${TRAVIS_JOB_ID}" -o bin/envprint .
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: FwPd80Y6IPQCtVyu1ygmiZSgW36bExzoEwT9/qUpTRQR7F1NuH4vzkcGleBdxD82MJ+Gfg7WcJDudv4dzKKHjAYII+aTEh4Ac+nap4e1CLxNmwHuLloTbvmDYo6PRTtEIhfqFLDcoAindb0elIEO7461NtY5kV4FBJr8JdXKYNZnlgxncSh5YAiyIbby9BaNxNX04nxOewe5/WDvAJ0XAhHNM5Y6jN6qGl3in6nI0u5DIt++JPGX0by14LmqgZfPxflW+cGjqs9/WPEIlno6uVMCWd7OwQGcvJDdHKN1uFJGb9Vf2BzgF+5FIOIysZfR3XomL0lYnuIuREWw1MurEwWRVvOw3fCj0BxIdnbWVlSKLsibIgc1AozSffWv4Sib/QWCP4stlqo3JN2po4eoRPlvIPSzW20NfGJ8WIK5qSdrHmQbO/UL2AvDaMOtUR4QwfIPwaVuRRLWJNVgZgF89/HnxG+qOQ6nM3n0boQBFTeV1MFA5CL9JnhUtPubbFMUFd51MY8WLmvbKdAIxj3E4Nd2GtP0dl1K6ulynXXQ6kkH0Jk+CXH2MFAyJK2e/a5lrWCv6p5zuuaWhEgANRtIrdkeesYQfaMBrvdygA3U3wn+3XoGEpqzJ575krdDbbTE0cBz9R2sQ3PJvYExJaUgtZyz6vPgY7YWjHD4qgPVPY0=
+  file: bin/envprint
+  on:
+    repo: dylanmei/envprint
+    tags: true
