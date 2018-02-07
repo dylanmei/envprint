@@ -1,6 +1,8 @@
 envprint
 --------
 
+[![Build Status](https://travis-ci.org/dylanmei/envprint.svg?branch=master)](https://travis-ci.org/dylanmei/envprint)
+
 Template processor for interpolating configuration files with environment variables.
 
 _Equivalent to processing templates using [gliderlabs/sigil](https://github.com/gliderlabs/sigil) with POSIX style variable expansion._
