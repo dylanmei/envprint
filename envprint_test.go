@@ -42,6 +42,12 @@ func Test_print(t *testing.T) {
 			errexit:  true,
 			errmsg:   "this is not a thing",
 		},
+		{
+			label:    "escaped var",
+			vars:     map[string]string{},
+			template: "hello \\${ENVPRINT_WORLD}",
+			document: "hello ${ENVPRINT_WORLD}",
+		},
 	}
 
 	for _, c := range cases {
