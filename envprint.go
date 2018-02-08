@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	filename    = flag.String("f", "", "Use template file instead of STDIN")
+	infile      = flag.String("f", "", "Use template file instead of STDIN")
+	outfile     = flag.String("o", "", "Write to file instead of STDOUT")
 	showVersion = flag.Bool("version", false, "Prints the current version")
 )
 
@@ -34,8 +35,8 @@ func main() {
 	var err error
 	var template []byte
 
-	if *filename != "" {
-		template, err = ioutil.ReadFile(*filename)
+	if *infile != "" {
+		template, err = ioutil.ReadFile(*infile)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
@@ -54,5 +55,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	os.Stdout.Write(document)
+	if *outfile == "" {
+		os.Stdout.Write(document)
+	} else {
+		err = ioutil.WriteFile(*outfile, document, 0644)
+
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+	}
 }
