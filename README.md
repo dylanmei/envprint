@@ -12,9 +12,11 @@ _Equivalent to processing templates using [gliderlabs/sigil](https://github.com/
 $ envprint -help
 Usage of envprint:
   -f string
-      Use template file instead of STDIN
+    	Use template file instead of STDIN
+  -o string
+    	Write to file instead of STDOUT
   -version
-      Prints the current version
+    	Prints the current version
 
 $ echo 'hello ${WORLD}' | envprint
 hello 
