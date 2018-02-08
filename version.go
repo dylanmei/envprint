@@ -15,5 +15,5 @@ func PrintVersion(w io.Writer) {
 		rev = "dev"
 	}
 
-	fmt.Fprintf(w, "%s.%s", Version, rev)
+	fmt.Fprintf(w, "envprint %s.%s\n", Version, rev)
 }
