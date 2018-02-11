@@ -14,7 +14,7 @@ Usage of envprint:
   -f string
     	Use template file instead of STDIN
   -o string
-    	Write to file instead of STDOUT
+    	Write out to file instead of STDOUT
   -version
     	Prints the current version
 
