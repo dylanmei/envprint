@@ -36,7 +36,7 @@ $ echo $?
 1
 ```
 
-# kubernetes example
+## kubernetes example
 
 Use `envprint` and `initContainers` to prep config files
 
