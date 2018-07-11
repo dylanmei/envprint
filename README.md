@@ -6,7 +6,7 @@ Template processor for printing configuration files interpolated with environmen
 
 _Equivalent to processing templates using [gliderlabs/sigil](https://github.com/gliderlabs/sigil) with POSIX style variable expansion._
 
-## example
+## simple example
 
 ```
 $ envprint -help
@@ -34,4 +34,63 @@ this is not a thing
 
 $ echo $?
 1
+```
+
+# kubernetes example
+
+Use `envprint` and `initContainers` to prep config files
+
+```
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello
+spec:
+  containers:
+  - name: hello
+    image: hello-example
+    args:
+    - "--properties=/etc/hello/hello.properties"
+    volumeMounts:
+    - name: config-dir
+      mountPath: /etc/hello
+  initContainers:
+  - name: envprint
+    image: dylanmei/envprint
+    args:
+    - "-f=/var/run/hello.properties.template"
+    - "-o=/etc/hello/hello.properties"
+    env:
+    - name: USERNAME
+      value: kitty
+    - name: PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: "hello-secrets"
+          key: password
+    volumeMounts:
+    - name: config-dir
+      mountPath: /etc/hello
+    - name: template-dir
+      mountPath: /var/run
+  volumes:
+  - name: config-dir
+    emptyDir: {}
+  - name: template-dir
+    configMap:
+      name: "hello-properties"
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "hello-properties"
+data:
+  hello.properties.template:
+    home=London
+    username=${USERNAME}
+    password=${PASSWORD}
 ```
